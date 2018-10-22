@@ -12,6 +12,10 @@ Session::start();
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -82,6 +86,7 @@ class ProductController extends Controller
                 ProductModel::insert($input);
                 return redirect(route('product.index'));
             }
+        }
 
             $input = [
 
@@ -98,7 +103,7 @@ class ProductController extends Controller
 
                 ProductModel::insert($input);
                 return required(route('product.index'));
-        }
+       
 
     }
 

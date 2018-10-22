@@ -34,40 +34,42 @@
 						  <thead>
 							  <tr>
 								  <th>ID</th>
-								  <th>Category Name</th>
-								  <th>Category Description</th>
+								  <th>Product Image</th>
 								  <th>Status</th>
+								  <th>Change Status</th>
 								  <th>Actions</th>
 							  </tr>
 						  </thead>   
 						  <tbody>
-						  	@foreach($categories as $category)
+						  	@foreach($sliders as $slider)
 							<tr>
-								<td>{{$category->id}}</td>
-								<td>{{$category->category_name}}</td>
-								<td>{{$category->category_description}}</td>
-								<td class="center">
-									@if($category->category_status ==1)
-										<span class="label label-success">Active</span>
-									@else
-										<span class="label label-danger">Deactive</span>
-									@endif
+								<td>{{$slider->id}}</td>
+								<td><img src="{{asset($slider->slider_image)}}" height="50px" width="100px"></td>
+								<td>
+									@if($slider->slider_status == 1)
+									    Active
+									 @else
+									 	Unactive
+									 	@endif
 								</td>
 								<td class="center">
-									@if($category->category_status == 1)
-										<a class="btn btn-danger" href="{{url('admin/category/active/'.$category->id)}}">
+									@if($slider->slider_status == 1)
+										<a class="btn btn-danger" href="{{url('admin/slider/active/'.$slider->id)}}">
 											<i class="halflings-icon white thumbs-down"></i>  
 										</a>
 									@else
-										<a class="btn btn-success" href="{{url('admin/category/deactive/'.$category->id)}}">
+										<a class="btn btn-success" href="{{url('admin/slider/deactive/'.$slider->id)}}">
 											<i class="halflings-icon white thumbs-up"></i>  
 										</a>
 									@endif
-									<a class="btn btn-info" href="{{ route('category.edit',$category->id) }}">
+								</td>
+								<td class="center">
+									<a class="btn btn-info" href="{{ route('slider.edit',$slider->id) }}">
 										<i class="halflings-icon white edit"></i>  
 									</a>
+								
 									<span>
-										<form action="{{route('category.destroy',$category->id)}}" method="post" id="delete_form_{{$category->id}}" style="display: none">
+										<form action="{{route('slider.destroy',$slider->id)}}" method="post" id="delete_form_{{$slider->id}}" style="display: none">
 					                      {{csrf_field()}}
 					                      {{method_field('DELETE')}}
 					                     </form>
@@ -76,7 +78,7 @@
 					                      if(confirm('Are sure to delete?'))
 					                      {
 					                        event.preventDefault();
-					                        document.getElementById('delete_form_{{$category->id}}').submit();
+					                        document.getElementById('delete_form_{{$slider->id}}').submit();
 					                      }
 					                      else{
 					                        event.preventDefault();

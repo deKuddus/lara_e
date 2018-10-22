@@ -311,7 +311,7 @@
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i>{{Session::get('admin_name')}}
+								<i class="halflings-icon white user"></i>{{Auth::user()->name}}
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -319,7 +319,19 @@
  									<span>Account Settings</span>
 								</li>
 								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="{{url('/admin/logout')}}"><i class="halflings-icon off"></i> Logout</a></li>
+								<li>
+									
+									 <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+
+								</li>
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->
@@ -367,12 +379,18 @@
 							</ul>	
 						</li>
 
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-envelope"></i><span class="hidden-tablet"> Slider</span></a>
+							<ul>
+								<li><a class="submenu" href="{{ route('slider.create') }}"><i class="icon-file-alt"></i><span class="hidden-tablet"> Add slider</span></a></li>
+								<li><a class="submenu" href="{{ route('slider.index') }}"><i class="icon-file-alt"></i><span class="hidden-tablet"> slider List</span></a></li>
+							</ul>	
+						</li>
 
 
 
-					<li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Slider</span></a></li>
-						<li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Social</span></a></li>
-						<li><a href="typography.html"><i class="fas fa-user-alt"></i><span class="hidden-tablet"> Delivary Man</span></a></li>
+
+
 					</ul>
 				</div>
 			</div>
