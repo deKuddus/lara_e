@@ -1,11 +1,9 @@
 @extends('layouts')
 
 @section('content')
+@include('pages.sidebar')
 
-<style type="text/css">
-    .right{}
-</style>>
-                        <h2>Login to your account</h2>
+            <h2>Login to your account</h2>
                         <hr>
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf

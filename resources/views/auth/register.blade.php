@@ -59,14 +59,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row ">
+                            <label  class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-6 ">
+
                                 <button type="submit" class="btn btn-info">
                                     {{ __('Register') }}
                                 </button>
                                  <a href="{{ route('login') }}" class="btn btn-warning">Login</a><br>
                             </div>
                         </div>
+
+
+
+
                     </form>
                    
     </section><!--/form-->

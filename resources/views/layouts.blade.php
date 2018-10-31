@@ -13,6 +13,7 @@
     <link href="{{asset('clientSide/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('clientSide/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('clientSide/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('clientSide/css/card.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -57,7 +58,7 @@
                <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="{{asset('clientSide/images/home/logo.png')}}" alt="" /></a>
+                            <a href="{{url('/')}}"><img src="{{asset('clientSide/images/home/logo.png')}}" alt="" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -87,9 +88,12 @@
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                @if(Auth::user())
+                                <li><a href="{{ route('mywishlist',Auth::user()->email) }}"><i class="fa fa-star"></i> My Wishlist</a></li>
+                                <li><a href="{{ route('mycomparelist',Auth::user()->email) }}"><i class="fa fa-star"></i> My comparelist</a></li>
+                                @endif
+                                <li><a href="{{ route('checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li> 
                                     @if(Auth::guest())
                                     <a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a>
@@ -127,13 +131,13 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="{{url('/')}}" class="active">Home</a></li>
                                 <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
                                         <li><a href="product-details.html">Product Details</a></li> 
                                         <li><a href="checkout.html">Checkout</a></li> 
-                                        <li><a href="cart.html">Cart</a></li> 
+                                        <li><a href="">Cart</a></li> 
                                         <li><a href="login.html">Login</a></li> 
                                     </ul>
                                 </li> 
@@ -157,64 +161,11 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-@include('pages.slider')
-     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Category</h2>
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        <?php 
 
-                            $allCategory = DB::table('tbl_categories')->where('category_status',1)->get();
-                            foreach ($allCategory as  $value) {
-                           ?>                           
-                     
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{ route('product_by_category_id',$value->id) }}">{{$value->category_name}}</a></h4>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        </div><!--/category-products-->
-                    
-                        <div class="brands_products"><!--brands_products-->
-                            <h2>Brands</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                            <?php 
 
-                                $allManufacturers = DB::table('tbl_manufacturers')->where('manufacturer_status',1)->get();
-                                foreach ($allManufacturers as  $value) {
 
-                           ?> 
-                                 <li><a href="{{ route('product_by_manufacturer_id',$value->id) }}"> <span class="pull-right">(50)</span>
-                                        {{$value->manufacturer_name}}
-                                    </a>
-                                </li>
-                            <?php } ?>
-                                </ul>
-                            </div>
-                        </div><!--/brands_products-->
-                        
-                        <div class="price-range"><!--price-range-->
-                            <h2>Price Range</h2>
-                            <div class="well text-center">
-                                 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                            </div>
-                        </div><!--/price-range-->
-                        
-                        <div class="shipping text-center"><!--shipping-->
-                            <img src="images/home/shipping.jpg" alt="" />
-                        </div><!--/shipping-->
-                    
-                    </div>
-                </div>
-                
-                <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
+
+
 
 
 

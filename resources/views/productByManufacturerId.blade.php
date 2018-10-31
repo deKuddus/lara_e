@@ -3,6 +3,7 @@
 
 @section('content')
 
+@include('pages.sidebar')
 
  <h2 class="title text-center">Features Items</h2>
                     @foreach ($products_by_manufacturers as $product_by_manufacturer)
@@ -30,8 +31,8 @@
                                         <li><a href="#"><i class="fa fa-plus-square"></i>{{$product_by_manufacturer->category->category_name}} Category</a></li>
                                         <li><a href="{{ route('product_details',$product_by_manufacturer->id) }}"><i class="fa fa-plus-square"></i>Show Details</a></li>
                                         <br>
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                        <li><a href="{{ route('addToWishlist',$product_by_manufacturer->id) }}"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                        <li><a href="{{ route('addToCompare',$product_by_manufacturer->id) }}"><i class="fa fa-plus-square"></i>Add to compare</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -1,10 +1,18 @@
 @extends('layouts')
+
  
 
 @section('content')
 
+@include('pages.slider')
+@include('pages.sidebar')
 
  <h2 class="title text-center">Features Items</h2>
+<?php 
+    $message = Session::get('compareMessage');
+    echo "<h2 style ='text-align:center;color:green'>".$message."</h2>";
+    Session::put('compareMessage',NULL);
+?>
                     @foreach ($products as $product)
                         
                     
@@ -21,14 +29,27 @@
                                             <div class="overlay-content">
                                                 <h2>${{$product->product_price}}</h2>
                                                 <p>{{$product->product_name}}</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <span>
+                                                    <form action="{{ route('addToCart',$product->id) }}" method = "post">
+                                                        @csrf
+                                                    <label>Quantity:</label>
+                                                    <input type="text" value="2" name="quantity" />
+                                                    <button type="Submit" class="add-to-cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        Add to cart
+                                                    </button>
+                                                    </form>
+                                                </span>
                                             </div>
                                         </div>
                                 </div>
                                 <div class="choose">
                                     <ul class="nav nav-pills nav-justified">
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>{{$product->category->category_name}} Category</a></li>
+                                        <li><a href="{{ route('product_details',$product->id) }}"><i class="fa fa-plus-square"></i>Show Details</a></li>
+                                        <br>
+                                        <li><a href="{{ route('addToWishlist',$product->id) }}"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                        <li><a href="{{ route('addToCompare',$product->id) }}"><i class="fa fa-plus-square"></i>Add to compare</a></li>
                                     </ul>
                                 </div>
                             </div>

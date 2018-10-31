@@ -3,16 +3,16 @@
 
 @section('content')
 
+@include('pages.sidebar')
 
  <h2 class="title text-center">Product Details</h2>
  @foreach ($product_details as $product)
  
-
                 <div class="col-sm-9 padding-right">
                     <div class="product-details"><!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                <img src="{{ asset($product->product_image) }}" alt="" />
+                                <img src="{{asset($product->product_image)}}" alt="" />
                                 <h3>ZOOM</h3>
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -21,13 +21,8 @@
                                     <div class="carousel-inner">
                                         <div class="item active">
                                           <a href=""><img src="{{asset('clientSide/images/product-details/similar1.jpg')}}" alt=""></a>
-                                          <a href=""><img src="{{asset('clientSide/images/product-details/similar1.jpg')}}" alt=""></a>
+                                          <a href=""><img src="{{asset('clientSide/images/product-details/similar2.jpg')}}" alt=""></a>
                                         </div>
-                                        <div class="item">
-                                          <a href=""><img src="{{asset('clientSide/images/product-details/similar1.jpg')}}" alt=""></a>
-                                          <a href=""><img src="{{asset('clientSide/images/product-details/similar1.jpg')}}" alt=""></a>
-                                        </div>
-
                                         
                                     </div>
 
@@ -44,21 +39,24 @@
                         <div class="col-sm-7">
                             <div class="product-information"><!--/product-information-->
                                 <img src="images/product-details/new.jpg" class="newarrival" alt="" />
-                                <h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-                                <p>Web ID: 1089772</p>
+                                <h2> <strong>Name: </strong>{{$product->product_name}}</h2>
+                                <p><strong>Color:</strong> {{$product->product_color}}</p>
                                 <img src="images/product-details/rating.png" alt="" />
                                 <span>
-                                    <span>US $59</span>
+                                    <span>Price: {{$product->product_price}} TK</span>
+                                    <form action="{{ route('addToCart',$product->id) }}" method = "post">
+                                        @csrf
                                     <label>Quantity:</label>
-                                    <input type="text" value="3" />
-                                    <button type="button" class="btn btn-fefault cart">
+                                    <input type="number" value="2" name="quantity" />
+                                    <button type="Submit" class="btn btn-fefault cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
                                     </button>
+                                    </form>
                                 </span>
                                 <p><b>Availability:</b> In Stock</p>
-                                <p><b>Condition:</b> New</p>
-                                <p><b>Brand:</b> E-SHOPPER</p>
+                                
+                                <p><b>Brand:</b> {{$product->manufacturer->manufacturer_name}}</p>
                                 <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                             </div><!--/product-information-->
                         </div>
@@ -67,23 +65,29 @@
                     <div class="category-tab shop-details-tab"><!--category-tab-->
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
-                                <li><a href="#details" data-toggle="tab">Sort Description</a></li>
-                                <li><a href="#companyprofile" data-toggle="tab">In Details</a></li>
-                                <li><a href="#tag" data-toggle="tab">Tag</a></li>
+                                <li><a href="#details" data-toggle="tab">Sort Details</a></li>
+                                <li><a href="#companyprofile" data-toggle="tab">Large Details</a></li>
+                                <li><a href="#tag" data-toggle="tab">Category</a></li>
                                 <li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
                             </ul>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade" id="details" >
-                                <p>{{$product->product_sort_desc}}</p>
+                                <div class="col-sm-12">
+                                    <p>{{$product->product_sort_desc}}</p>
+                                </div>
                             </div>
                             
                             <div class="tab-pane fade" id="companyprofile" >
-                                <p>{{$product->product_long_desc}}</p>
+                                <div class="col-sm-12">
+                                    <p>{{$product->product_long_desc}}</p>
+                                </div>
                             </div>
                             
                             <div class="tab-pane fade" id="tag" >
-                                <h2>{{$product->category->category_name}}</h2>
+                               <div class="col-sm-12"">                                    
+                                        <h1>{{$product->category->category_name}}</h1>
+                                </div>
                             </div>
                             
                             <div class="tab-pane fade active in" id="reviews" >

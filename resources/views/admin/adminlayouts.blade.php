@@ -24,7 +24,6 @@
 	<link id="base-style-responsive" href="{{asset('serverSide/css/style-responsive.css')}}" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 
-
 	<!-- end: CSS -->
 	
 
@@ -57,7 +56,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Metro</span></a>
+				<a class="brand" href="{{url('admin/dashboard')}}"><span>Metro</span></a>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -384,6 +383,14 @@
 							<ul>
 								<li><a class="submenu" href="{{ route('slider.create') }}"><i class="icon-file-alt"></i><span class="hidden-tablet"> Add slider</span></a></li>
 								<li><a class="submenu" href="{{ route('slider.index') }}"><i class="icon-file-alt"></i><span class="hidden-tablet"> slider List</span></a></li>
+							</ul>	
+						</li>
+
+					<li>
+							<a class="dropmenu" href="#"><i class="icon-envelope"></i><span class="hidden-tablet"> Order</span></a>
+							<ul>
+								<li><a class="submenu" href="{{ route('showPendingOrder') }}"><i class="icon-file-alt"></i><span class="hidden-tablet">  Peinding Order</span></a></li>
+								<li><a class="submenu" href="{{ route('showCompleteOrder') }}"><i class="icon-file-alt"></i><span class="hidden-tablet"> slider List</span></a></li>
 							</ul>	
 						</li>
 

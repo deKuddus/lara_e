@@ -153,9 +153,7 @@ class ProductController extends Controller
             'productColor' => 'required|string',
             'productSize' => 'required|'
         ]);
-
-
-
+        
         $image = $request->file('productImage');
         if($image){
             $imageName = str_random(20);
@@ -179,7 +177,7 @@ class ProductController extends Controller
                     'product_image' =>$image_url
                 ];
                
-                ProductModel::where('product_id',$id)->update($input);
+                ProductModel::where('id',$id)->update($input);
                 return redirect(route('product.index'));
             }
          }
